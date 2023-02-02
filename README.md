@@ -1,6 +1,6 @@
 # BFST2023-handins
 
-A JavaFX application for parsing and standardizing addresses using the Address Parser library, built with Gradle.
+A JavaFX application for parsing danish addresses, built with Gradle.
 
 > **Requirements:**
 
