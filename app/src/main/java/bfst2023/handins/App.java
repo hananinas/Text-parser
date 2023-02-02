@@ -4,40 +4,27 @@
 package bfst2023.handins;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class App extends Application {
-    public String getGreeting() {
-        return "Hello World!";
-    }
 
-    public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+    public static void main(String[] args) throws Exception {
         launch(args);
     }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        primaryStage.setTitle("Address Parsing");
-        var pane = new BorderPane();
-        var input = new TextField();
-        var output = new TextArea();    
-        pane.setTop(input);
-        pane.setCenter(output);
-        
-        input.setOnAction(e->{
-            String a = input.getText();
-            var add = Address.parse(a);
-            output.setText(add.toString());
-        });
-        Scene scene = new Scene(pane);
-        primaryStage.setScene(scene);
-
-        primaryStage.show();
-        
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("main.fxml"));
+            primaryStage.setTitle("Map parser");
+            primaryStage.setScene(new Scene(root, 600, 400));
+            primaryStage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
