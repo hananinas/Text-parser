@@ -21,9 +21,10 @@ gradle run
 
 > **Usage**
 
-The application consists of a user interface for entering an address, and a parsed result is displayed in a separate text area. You can also specify the format for the parsed address, such as "street, city".
+This part is still under development:
 
-This part is still under development.
+- The application consists of a user interface for entering an address, and a parsed result is displayed in a separate text area. You can also specify the format for the parsed address, such as "street, city".
+
 
 The parsed address is obtained using the Parser class. In the event that the address cannot be parsed, a NoMatchFoundException is thrown.
 
