@@ -27,7 +27,7 @@ dependencies {
 
 application {
     // Define the main class for the application.
-    mainClass = 'bfst2023.handins.App'
+    mainClass = 'bfst2023.handins.Main'
 }
 
 tasks.named('test') {

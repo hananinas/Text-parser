@@ -1,6 +1,5 @@
 package bfst2023.handins.Controller;
 
-
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -24,6 +23,8 @@ public class MainController implements Initializable {
     private Text postalcode;
     @FXML
     private Text street;
+    @FXML
+    private Text error;
 
     private Parser parser;
     private Address address;
@@ -36,26 +37,21 @@ public class MainController implements Initializable {
     public void upddateAddress(ActionEvent event) {
 
         try {
-
             address = parser.parse(inputField.getText());
+            address.print();
             street.setText(address.getStreetName());
             number.setText("" + address.getHouseNumber());
             postalcode.setText("" + address.getPostalCode());
             city.setText(address.getCityName());
-
         } catch (NoMatchException e) {
-
             System.out.println(e.getMessage());
-            inputField.setText(e.getMessage());
-
+            error.setText(e.getMessage());
         } catch (NullPointerException e) {
 
-            inputField.setText("no input!");
+            error.setText("No input!");
 
         }
 
     }
 
 }
-
-

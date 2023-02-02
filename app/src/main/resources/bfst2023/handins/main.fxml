@@ -27,14 +27,26 @@
             <HBox prefHeight="78.0" prefWidth="281.0">
                <children>
                   <Pane prefHeight="78.0" prefWidth="92.0" />
-                  <Button fx:id="inputButton" mnemonicParsing="false" onAction="#upddateAddress" prefHeight="25.0" prefWidth="86.0" styleClass="buotton-background" text="Button" textFill="#613131">
-                     <opaqueInsets>
-                        <Insets top="14.0" />
-                     </opaqueInsets>
-                     <HBox.margin>
-                        <Insets top="32.0" />
-                     </HBox.margin>
-                  </Button>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Text fx:id="error" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="104.936767578125">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="6.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Button fx:id="inputButton" mnemonicParsing="false" onAction="#upddateAddress" prefHeight="25.0" prefWidth="110.0" styleClass="buotton-background" text="Button" textFill="#613131">
+                           <opaqueInsets>
+                              <Insets top="14.0" />
+                           </opaqueInsets>
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                        </Button>
+                     </children>
+                  </VBox>
                </children>
             </HBox>
             <VBox prefHeight="200.0" prefWidth="100.0">
