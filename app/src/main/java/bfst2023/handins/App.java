@@ -3,12 +3,35 @@
  */
 package bfst2023.handins;
 
-public class App {
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
+
+public class App extends Application {
     public String getGreeting() {
         return "Hello World!";
     }
 
     public static void main(String[] args) {
         System.out.println(new App().getGreeting());
+        launch(args);
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        primaryStage.setTitle("Address Parsing");
+        var pane = new BorderPane();
+        var input = new TextField();
+        var output = new TextArea();    
+        pane.setTop(input);
+        pane.setCenter(output);
+        Scene scene = new Scene(pane);
+        primaryStage.setScene(scene);
+
+        primaryStage.show();
+        
     }
 }
