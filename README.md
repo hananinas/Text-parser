@@ -4,9 +4,10 @@ A JavaFX application for parsing and standardizing addresses using the Address P
 
 > **Requirements:**
 
-Java 8 or later
-JavaFX 8 or later
-Gradle 6.0 or later
+
+- Java 8 or later
+- JavaFX 8 or later
+- Gradle 6.0 or later
 
 > **Installation**
 To run the Address Parser with JavaFX and Gradle application, follow these steps:
