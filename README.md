@@ -23,6 +23,8 @@ gradle run
 
 The application consists of a user interface for entering an address, and a parsed result is displayed in a separate text area. You can also specify the format for the parsed address, such as "street, city".
 
-The parsed address is obtained using the AddressParser class from the Address Parser library. In the event that the address cannot be parsed, a NoMatchFoundException is thrown.
+This part is still under development.
+
+The parsed address is obtained using the Parser class. In the event that the address cannot be parsed, a NoMatchFoundException is thrown.
 
 The application follows a Model-View-Controller (MVC) design pattern, with the Address class representing the model, the JavaFX UI components representing the view, and the MainController class serving as the controller.
