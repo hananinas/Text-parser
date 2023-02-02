@@ -28,6 +28,12 @@ public class App extends Application {
         var output = new TextArea();    
         pane.setTop(input);
         pane.setCenter(output);
+        
+        input.setOnAction(e->{
+            String a = input.getText();
+            var add = Address.parse(a);
+            output.setText(add.toString());
+        });
         Scene scene = new Scene(pane);
         primaryStage.setScene(scene);
 

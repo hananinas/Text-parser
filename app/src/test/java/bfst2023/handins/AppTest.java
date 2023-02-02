@@ -12,9 +12,9 @@ class AppTest {
         assertNotNull(classUnderTest.getGreeting(), "app should have a greeting");
     }
     @Test void simple() {
-        var addr = Address.parse("Finsensvej 47B, 2000 Frederiksberg");
+        var addr = Address.parse("Finsensvej 50, 2000 Frederiksberg");
         assertEquals("Finsensvej", addr.street);
-        assertEquals("47B", addr.house);
+        assertEquals("50", addr.house);
         assertEquals("2000", addr.postcode);
         assertEquals("Frederiksberg", addr.city);
     }
