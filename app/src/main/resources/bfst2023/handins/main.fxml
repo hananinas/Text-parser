@@ -23,7 +23,7 @@
                   </Text>
                </children>
             </Pane>
-            <TextField fx:id="inputField" prefHeight="25.0" prefWidth="262.0" text="Example: Pilemosevej 40 2610 Rødovre" />
+            <TextField fx:id="inputField" prefHeight="25.0" prefWidth="262.0" text="Example: Pilemosevej 40, 2610 Rødovre" />
             <HBox prefHeight="78.0" prefWidth="281.0">
                <children>
                   <Pane prefHeight="78.0" prefWidth="92.0" />

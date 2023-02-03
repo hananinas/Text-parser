@@ -1,43 +1,85 @@
 package bfst2023.handins.Model;
 
-import java.text.Format;
-import java.util.regex.*;
+import java.util.regex.Pattern;
 
 public class Address {
-    private String streetName;
-    private int houseNumber;
-    private int postalCode;
-    private String cityName;
+    public final String street, house, floor, side, postcode, city;
 
-    public Address(String streetName, int houseNumber, int postalCode, String cityName) {
-        this.streetName = streetName;
-        this.houseNumber = houseNumber;
-        this.postalCode = postalCode;
-        this.cityName = cityName;
+    private Address(
+            String _street, String _house, String _floor, String _side,
+            String _postcode, String _city) {
+        street = _street;
+        house = _house;
+        floor = _floor;
+        side = _side;
+        postcode = _postcode;
+        city = _city;
     }
 
-    public String getAddress() {
-        return String.format("%s %s %s %s", streetName, houseNumber, postalCode, cityName);
+    public String toString() {
+        return street + " " + house + ", " + floor + " " + side + "\n"
+                + postcode + " " + city;
     }
 
-    public String getStreetName() {
-        return streetName;
+    private final static String REGEX = "(?<street>\\D.+)(\\s)(?<house>\\d{1,3}\\D.+|\\d{1,3},)(\\s)(?<postcode>\\d{4})(\\s)(?<city>\\D+)$";
+    private final static Pattern PATTERN = Pattern.compile(REGEX);
+
+    public static Address parse(String input) {
+        var builder = new Builder();
+        var matcher = PATTERN.matcher(input);
+
+        if (matcher.matches()) {
+            builder.postcode(matcher.group("postcode"));
+            builder.city(matcher.group("city"));
+            builder.house(matcher.group("house"));
+            builder.street(matcher.group("street"));
+        } else if(input.isEmpty()){
+            throw new NullPointerException();
+        } else {
+            throw new NoMatchException();
+        }
+
+        return builder.build();
+
     }
 
-    public int getHouseNumber() {
-        return houseNumber;
+    public static class Builder {
+        private String street, house, floor, side, postcode, city;
+
+        public Builder street(String _street) {
+            street = _street;
+            return this;
+        }
+
+        public Builder house(String _house) {
+            house = _house;
+            return this;
+        }
+
+        public Builder floor(String _floor) {
+            floor = _floor;
+            return this;
+        }
+
+        public Builder side(String _side) {
+            side = _side;
+            return this;
+        }
+
+        public Builder postcode(String _postcode) {
+            postcode = _postcode;
+            return this;
+        }
+
+        public Builder city(String _city) {
+            city = _city;
+            return this;
+        }
+
+        public Address build() {
+            return new Address(street, house, floor, side, postcode, city);
+        }
+
     }
 
-    public int getPostalCode() {
-        return postalCode;
-    }
-
-    public String getCityName() {
-        return cityName;
-    }
-
-    public void print() {
-        System.out.printf("Streetname: %s \nHousenumber: %s \nPostalcode: %s \nCityname: %s", streetName,
-                houseNumber, postalCode, cityName);
-    }
 }

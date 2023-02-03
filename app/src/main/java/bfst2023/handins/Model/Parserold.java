@@ -3,8 +3,8 @@ package bfst2023.handins.Model;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
-public class Parser {
-    private Pattern pattern;
+public class Parserold {
+/*     private Pattern pattern;
     private String roadName;
     private int number;
     private int postalCode;
@@ -34,5 +34,5 @@ public class Parser {
         }
 
         return new Address(roadName, number, postalCode, city);
-    }
+    } */
 }

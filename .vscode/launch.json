@@ -9,11 +9,13 @@
             "name": "Launch Main",
             "request": "launch",
             "mainClass": "bfst2023.handins.Main",
+            "vmArgs": "--module-path C:/java/javafx-sdk-19/lib --add-modules javafx.controls,javafx.fxml",
             "projectName": "app"
         },
         {
             "type": "java",
             "name": "Launch Current File",
+            "vmArgs": "--module-path C:/java/javafx-sdk-19/lib --add-modules javafx.controls,javafx.fxml",
             "request": "launch",
             "mainClass": "${file}"
         },

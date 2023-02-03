@@ -5,7 +5,6 @@ import java.util.ResourceBundle;
 
 import bfst2023.handins.Model.Address;
 import bfst2023.handins.Model.NoMatchException;
-import bfst2023.handins.Model.Parser;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -26,30 +25,32 @@ public class MainController implements Initializable {
     @FXML
     private Text error;
 
-    private Parser parser;
     private Address address;
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-        parser = new Parser();
     }
 
     public void upddateAddress(ActionEvent event) {
 
         try {
-            address = parser.parse(inputField.getText());
-            address.print();
-            street.setText(address.getStreetName());
-            number.setText("" + address.getHouseNumber());
-            postalcode.setText("" + address.getPostalCode());
-            city.setText(address.getCityName());
+            address = Address.parse(inputField.getText());
+            System.out.println(address.city);
+            street.setText(address.street);
+
+            if(address.floor == null){
+                number.setText(address.house);
+            } else{
+                number.setText(address.house +  address.floor);
+            }
+
+            postalcode.setText(address.postcode);
+            city.setText(address.city);
         } catch (NoMatchException e) {
             System.out.println(e.getMessage());
             error.setText(e.getMessage());
         } catch (NullPointerException e) {
-
             error.setText("No input!");
-
         }
 
     }
