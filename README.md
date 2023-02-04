@@ -36,19 +36,19 @@ The parsed address is obtained using the Parser class. In the event that the add
 
 - This regular expression is used to match strings that represent an address, which includes the following parts:
 
-- street: the street name, captured as the "street" group. Matched by the pattern [\D\s.]+. This pattern matches one or more characters that are not a digit, whitespace, or a dot.
+- Street: the street name, captured as the "street" group. Matched by the pattern [\D\s.]+. This pattern matches one or more characters that are not a digit, whitespace, or a dot.
 
-- number: the house number, captured as the "house" group. Matched by the pattern \d+\D?, which matches one or more digits followed by an optional non-digit character.
+- Number: the house number, captured as the "house" group. Matched by the pattern \d+\D?, which matches one or more digits followed by an optional non-digit character.
 
-- floor: the floor of the building, captured as the "floor" group. Matched by the pattern st\.|kl\.|\d{0,2}. This pattern matches either the string "st." or "kl.", or zero to two characters that are digits or dots.
+- Floor: the floor of the building, captured as the "floor" group. Matched by the pattern st\.|kl\.|\d{0,2}. This pattern matches either the string "st." or "kl.", or zero to two characters that are digits or dots.
 
-- side: the side of the building, captured as the "side" group. Matched by the pattern th|tv|mf|\D\d{1,2}. This pattern matches either the string "th", "tv", or "mf", or one or two characters that are not a digit.
+- Side: the side of the building, captured as the "side" group. Matched by the pattern th|tv|mf|\D\d{1,2}. This pattern matches either the string "th", "tv", or "mf", or one or two characters that are not a digit.
 
-- additionalCity: additional information about the city, captured as the "additionalCity" group. Matched by the pattern [^,]+?, which matches one or more characters that are not a comma.
+- AdditionalCity: additional information about the city, captured as the "additionalCity" group. Matched by the pattern [^,]+?, which matches one or more characters that are not a comma.
 
-- postcode: the postcode, captured as the "postcode" group. Matched by the pattern \d{4}, which matches exactly four digits.
+- Postcode: the postcode, captured as the "postcode" group. Matched by the pattern \d{4}, which matches exactly four digits.
 
-- city: the city name, captured as the "city" group. Matched by the pattern \D+. This pattern matches one or more characters that are not a digit.
+- City: the city name, captured as the "city" group. Matched by the pattern \D+. This pattern matches one or more characters that are not a digit.
 
 The overall string is matched by the pattern \s*, which matches zero or more whitespaces.
 
