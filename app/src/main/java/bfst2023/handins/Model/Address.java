@@ -21,8 +21,8 @@ public class Address {
                 + postcode + " " + city;
     }
 
-    private final static String REGEX = "(?<street>\\D.+)(\\s)(?<house>\\d{1,3}\\D.+|\\d{1,3},)(\\s)(?<postcode>\\d{4})(\\s)(?<city>\\D+)$";
-    private final static Pattern PATTERN = Pattern.compile(REGEX);
+    private final static String REGEX = "^(?<street>[\\D\\s.]+)\\s+(?<number>\\d+\\D?),\\s+((?<floor>st\\.|kl\\.|[0-9.]{0,2})\\s?(?<side>th|tv|mf|\\D\\d{1,2}))?(?<additionalCity>[^,]+)?(, )?(?<postcode>\\d{4})\\s*(?<city>\\D+)$";
+    private final static Pattern PATTERN = Pattern.compile(REGEX, Pattern.CASE_INSENSITIVE);
 
     public static Address parse(String input) {
         var builder = new Builder();
@@ -31,9 +31,11 @@ public class Address {
         if (matcher.matches()) {
             builder.postcode(matcher.group("postcode"));
             builder.city(matcher.group("city"));
-            builder.house(matcher.group("house"));
+            builder.side(matcher.group("side"));
+            builder.floor(matcher.group("floor"));
+            builder.house(matcher.group("number"));
             builder.street(matcher.group("street"));
-        } else if(input.isEmpty()){
+        } else if (input.isEmpty()) {
             throw new NullPointerException();
         } else {
             throw new NoMatchException();
