@@ -21,7 +21,7 @@ public class Address {
                 + postcode + " " + city;
     }
 
-    private final static String REGEX = "^(?<street>[\\D\\s.]+)\\s+(?<number>\\d+\\D?),\\s+((?<floor>st\\.|kl\\.|[0-9.]{0,2})\\s?(?<side>th|tv|mf|\\D\\d{1,2}))?(?<additionalCity>[^,]+)?(, )?(?<postcode>\\d{4})\\s*(?<city>\\D+)$";
+    private final static String REGEX = "^(?<street>[\\D\\s.]+)\\s+(?<number>\\d+\\D?),\\s+((?<floor>st\\.|kl\\.|[\\d.]{0,2})\\s?(?<side>th|tv|mf|\\D\\d{1,2}))?(?<additionalCity>[^,]+)?(, )?(?<postcode>\\d{4})\\s*(?<city>\\D+)$";
     private final static Pattern PATTERN = Pattern.compile(REGEX, Pattern.CASE_INSENSITIVE);
 
     public static Address parse(String input) {

@@ -31,7 +31,7 @@ The parsed address is obtained using the Parser class. In the event that the add
 > This procces is done using the following regular expression:
 
 ```
-^(?<street>[\D\s.]+)\s+(?<number>\d+\D?),\s+((?<floor>st\.|kl\.|[0-9.]{0,2})\s?(?<side>th|tv|mf|\D\d{1,2}))?(?<additionalCity>[^,]+)?(, )?(?<postcode>\d{4})\s*(?<city>\D+)$
+^(?<street>[\D\s.]+)\s+(?<number>\d+\D?),\s+((?<floor>st\.|kl\.|[\d.]{0,2})\s?(?<side>th|tv|mf|\D\d{1,2}))?(?<additionalCity>[^,]+)?(, )?(?<postcode>\d{4})\s*(?<city>\D+)$
 ```
 
 - This regular expression is used to match strings that represent an address, which includes the following parts:
@@ -40,7 +40,7 @@ The parsed address is obtained using the Parser class. In the event that the add
 
 - number: the house number, captured as the "house" group. Matched by the pattern \d+\D?, which matches one or more digits followed by an optional non-digit character.
 
-- floor: the floor of the building, captured as the "floor" group. Matched by the pattern st\.|kl\.|[0-9.]{0,2}. This pattern matches either the string "st." or "kl.", or zero to two characters that are digits or dots.
+- floor: the floor of the building, captured as the "floor" group. Matched by the pattern st\.|kl\.|\d{0,2}. This pattern matches either the string "st." or "kl.", or zero to two characters that are digits or dots.
 
 - side: the side of the building, captured as the "side" group. Matched by the pattern th|tv|mf|\D\d{1,2}. This pattern matches either the string "th", "tv", or "mf", or one or two characters that are not a digit.
 
