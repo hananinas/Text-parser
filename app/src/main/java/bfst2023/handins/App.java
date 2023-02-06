@@ -19,8 +19,9 @@ public class App extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("main.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("views/main.fxml"));
             primaryStage.setTitle("Map parser");
+            primaryStage.getIcons().add(new Image(getClass().getResource("images/logo.png").toURI().toString()));
             primaryStage.setScene(new Scene(root, 600, 400));
             primaryStage.show();
         } catch (Exception e) {

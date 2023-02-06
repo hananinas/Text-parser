@@ -1,16 +1,22 @@
 package bfst2023.handins.Controller;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.URL;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.ResourceBundle;
-
-import org.checkerframework.checker.units.qual.A;
+import java.util.Set;
 
 import bfst2023.handins.Model.Address;
+import bfst2023.handins.Model.AutoComplete;
 import bfst2023.handins.Model.NoMatchException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
+import org.controlsfx.control.textfield.TextFields;
+
 import javafx.scene.text.Text;
 
 public class MainController implements Initializable {
@@ -28,9 +34,21 @@ public class MainController implements Initializable {
     private Text error;
 
     private Address address;
+    private AutoComplete posibAutoComplete;
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
+        try {
+            posibAutoComplete = new AutoComplete();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        TextFields.bindAutoCompletion(inputField, posibAutoComplete.getPosibleSuggestion());
+
     }
 
     public void upddateAddress(ActionEvent event) {
@@ -43,7 +61,7 @@ public class MainController implements Initializable {
 
             if (address.floor == null) {
                 number.setText(address.house);
-            } else if(address.side == null) {
+            } else if (address.side == null) {
                 number.setText(address.house + address.side);
             } else {
                 number.setText(address.house + " " + address.floor + " " + address.side);

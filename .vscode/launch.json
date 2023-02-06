@@ -6,16 +6,23 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch AutoComplete",
+            "request": "launch",
+            "mainClass": "bfst2023.handins.Model.AutoComplete",
+            "projectName": "app"
+        },
+        {
+            "type": "java",
             "name": "Launch Main",
             "request": "launch",
             "mainClass": "bfst2023.handins.Main",
-            "vmArgs": "--module-path C:/java/javafx-sdk-19/lib --add-modules javafx.controls,javafx.fxml",
+            "vmArgs": "--module-path C:/java/javafx-sdk-19/lib --add-modules javafx.controls,javafx.fxml --add-exports=javafx.base/com.sun.javafx.event=org.controlsfx.controls",
             "projectName": "app"
         },
         {
             "type": "java",
             "name": "Launch Current File",
-            "vmArgs": "--module-path C:/java/javafx-sdk-19/lib --add-modules javafx.controls,javafx.fxml",
+            "vmArgs": "--module-path C:/java/javafx-sdk-19/lib --add-modules javafx.controls,javafx.fxml --add-exports=javafx.base/com.sun.javafx.event=org.controlsfx.controls",
             "request": "launch",
             "mainClass": "${file}"
         },
@@ -23,7 +30,7 @@
             "type": "java",
             "name": "Launch App",
             "request": "launch",
-            "vmArgs": "--module-path C:/java/javafx-sdk-19/lib --add-modules javafx.controls,javafx.fxml",
+            "vmArgs": "--module-path C:/java/javafx-sdk-19/lib --add-modules javafx.controls,javafx.fxml --add-exports=javafx.base/com.sun.javafx.event=org.controlsfx.controls",
             "mainClass": "bfst2023.handins.App",
             "projectName": "app"
         }
