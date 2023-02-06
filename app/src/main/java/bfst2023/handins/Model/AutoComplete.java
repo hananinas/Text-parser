@@ -1,39 +1,33 @@
 package bfst2023.handins.Model;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
-import java.net.URL;
+import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Scanner;
-
-import com.google.common.base.Utf8;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class AutoComplete {
 
     private ArrayList<String> posibleSuggestion;
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, URISyntaxException {
         AutoComplete auto = new AutoComplete();
+        auto.number("pilemosevej 40");
         for (String string : auto.posibleSuggestion) {
             System.out.println(string);
         }
 
     }
 
-    public AutoComplete() throws IOException {
+    public AutoComplete() throws IOException, URISyntaxException {
         posibleSuggestion = new ArrayList<>();
 
-        Scanner sc = new Scanner(
-                new FileReader("/assets/citynames.txt", StandardCharsets.UTF_8));
-
+        InputStream city = getClass().getClassLoader().getResourceAsStream("bfst2023/handins/assets/streetnames.txt");
+        Scanner sc = new Scanner(new InputStreamReader(city, StandardCharsets.UTF_8));
         while (sc.hasNextLine()) {
             posibleSuggestion.add(sc.nextLine());
         }
@@ -41,5 +35,25 @@ public class AutoComplete {
 
     public ArrayList<String> getPosibleSuggestion() {
         return posibleSuggestion;
+    }
+
+    public void number(String s) {
+        ArrayList<String> tempPosib = new ArrayList<>();
+        for (String string : posibleSuggestion) {
+            Pattern pattern = Pattern.compile("([\\D\s.]+)(\\d)", Pattern.CASE_INSENSITIVE);
+            Matcher matcher = pattern.matcher(s);
+            System.out.println(matcher.group(0));
+            if (matcher.matches()) {
+                if (matcher.group(1).toLowerCase().equals(string.toLowerCase())) {
+                    InputStream postcode = getClass().getClassLoader()
+                            .getResourceAsStream("bfst2023/handins/assets/postnumre.txt");
+                    Scanner sc = new Scanner(new InputStreamReader(postcode, StandardCharsets.UTF_8));
+                    while (sc.hasNextLine()) {
+                        tempPosib.add(s.substring(0, 1) + s.substring(1) + " " + sc.nextLine());
+                    }
+                }
+            }
+        }
+        posibleSuggestion = tempPosib;
     }
 }

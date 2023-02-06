@@ -2,6 +2,7 @@ package bfst2023.handins.Controller;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -43,12 +44,10 @@ public class MainController implements Initializable {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (URISyntaxException e) {
             e.printStackTrace();
         }
-
-        TextFields.bindAutoCompletion(inputField, posibAutoComplete.getPosibleSuggestion());
-
     }
 
     public void upddateAddress(ActionEvent event) {
@@ -71,7 +70,8 @@ public class MainController implements Initializable {
             city.setText(address.city);
         } catch (NoMatchException e) {
             System.out.println(e.getMessage());
-            error.setText(e.getMessage());
+            posibAutoComplete.number(inputField.getText());
+            TextFields.bindAutoCompletion(inputField, posibAutoComplete.getPosibleSuggestion());
         } catch (NullPointerException e) {
             error.setText("No input!");
         }
