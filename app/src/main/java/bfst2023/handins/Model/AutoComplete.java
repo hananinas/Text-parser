@@ -1,45 +1,81 @@
 package bfst2023.handins.Model;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
-import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Scanner;
-
-import com.google.common.base.Utf8;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class AutoComplete {
 
-    private ArrayList<String> posibleSuggestion;
+    private ArrayList<String> possibleSuggestion, possibleSuggestionForPostCodes, possibleSuggestionForCityNames;
+
+    private Pattern pattern;
+    private Matcher matcher;
 
     public static void main(String[] args) throws IOException {
         AutoComplete auto = new AutoComplete();
-        for (String string : auto.posibleSuggestion) {
+        auto.number("");
+        for (String string : auto.possibleSuggestion) {
             System.out.println(string);
         }
 
     }
 
     public AutoComplete() throws IOException {
-        posibleSuggestion = new ArrayList<>();
+        possibleSuggestion = new ArrayList<>();
+        possibleSuggestionForPostCodes = new ArrayList<>();
+        possibleSuggestionForCityNames = new ArrayList<>();
 
-        Scanner sc = new Scanner(
-                new FileReader("/assets/citynames.txt", StandardCharsets.UTF_8));
-
+        // Get the data from the txt file that contians all streetnames
+        InputStream street = getClass().getClassLoader().getResourceAsStream("bfst2023/handins/assets/streetnames.txt");
+        Scanner sc = new Scanner(new InputStreamReader(street, StandardCharsets.UTF_8));
         while (sc.hasNextLine()) {
-            posibleSuggestion.add(sc.nextLine());
+            possibleSuggestion.add(sc.nextLine());
         }
+        // Get the data from the txt file that contians all postnumre
+        InputStream postcodes = getClass().getClassLoader()
+                .getResourceAsStream("bfst2023/handins/assets/postnumre.txt");
+        Scanner sc_post = new Scanner(new InputStreamReader(postcodes, StandardCharsets.UTF_8));
+        while (sc_post.hasNextLine()) {
+            possibleSuggestionForPostCodes.add(sc_post.nextLine());
+        }
+        // Get the data from the txt file that contians all postnumre
+        InputStream city = getClass().getClassLoader().getResourceAsStream("bfst2023/handins/assets/citynames.txt");
+        Scanner sc_city = new Scanner(new InputStreamReader(city, StandardCharsets.UTF_8));
+        while (sc_city.hasNextLine()) {
+            possibleSuggestionForCityNames.add(sc_city.nextLine());
+        }
+
     }
 
     public ArrayList<String> getPosibleSuggestion() {
-        return posibleSuggestion;
+        return possibleSuggestion;
+    }
+
+    public void number(String s) {
+
+        // instiate a temp ArrayList with possibilities
+        ArrayList<String> tempPosib = new ArrayList<>();
+
+        // check if the string is a street
+        pattern = Pattern.compile("^(?<street>[\\w.]+)(.+)$");
+        matcher = pattern.matcher(s);
+        if (matcher.matches()) {
+            // loop trough the current List of possibleSuggestion
+            for (String string : possibleSuggestion) {
+                // if check if it is in the list of all possibleSuggestion
+                if (matcher.group("street").toLowerCase().equals(string.toLowerCase())) {
+                    for (String postcode : possibleSuggestionForPostCodes) {
+                        tempPosib.add(s.substring(0, 1).toUpperCase() + s.substring(1) + " " + postcode);
+                    }
+                }
+            }
+            // make the temp list the new currentlist
+            possibleSuggestion = tempPosib;
+        }
     }
 }

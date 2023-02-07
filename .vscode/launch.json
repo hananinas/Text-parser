@@ -8,6 +8,13 @@
             "type": "java",
             "name": "Launch AutoComplete",
             "request": "launch",
+            "mainClass": "bfst2023.handins.AutoComplete",
+            "projectName": "app"
+        },
+        {
+            "type": "java",
+            "name": "Launch AutoComplete",
+            "request": "launch",
             "mainClass": "bfst2023.handins.Model.AutoComplete",
             "projectName": "app"
         },
