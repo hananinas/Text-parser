@@ -34,7 +34,7 @@ public class Address {
             builder.side(matcher.group("side"));
             builder.floor(matcher.group("floor"));
             builder.house(matcher.group("number"));
-            builder.street(matcher.group("street"));
+            builder.street(matcher.group("street").trim());
         } else if (input.isEmpty()) {
             throw new NullPointerException();
         } else {
