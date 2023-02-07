@@ -11,16 +11,14 @@ import java.util.regex.Pattern;
 
 public class AutoComplete {
 
-    private ArrayList<String> possibleSuggestion;
-    private ArrayList<String> possibleSuggestionForPostCodes;
-    private ArrayList<String> possibleSuggestionForCityNames;
+    private ArrayList<String> possibleSuggestion, possibleSuggestionForPostCodes, possibleSuggestionForCityNames;
 
     private Pattern pattern;
     private Matcher matcher;
 
     public static void main(String[] args) throws IOException {
         AutoComplete auto = new AutoComplete();
-        auto.number("40");
+        auto.number("");
         for (String string : auto.possibleSuggestion) {
             System.out.println(string);
         }
@@ -60,7 +58,7 @@ public class AutoComplete {
 
     public void number(String s) {
 
-        // instiate a temp ArrayList with possibilities 
+        // instiate a temp ArrayList with possibilities
         ArrayList<String> tempPosib = new ArrayList<>();
 
         // check if the string is a street
@@ -72,28 +70,12 @@ public class AutoComplete {
                 // if check if it is in the list of all possibleSuggestion
                 if (matcher.group("street").toLowerCase().equals(string.toLowerCase())) {
                     for (String postcode : possibleSuggestionForPostCodes) {
-                        tempPosib.add(s.substring(0, 1).toUpperCase() + s.substring(1) + ", " + postcode);
+                        tempPosib.add(s.substring(0, 1).toUpperCase() + s.substring(1) + " " + postcode);
                     }
                 }
             }
-            // make the temp list the new currentlist 
+            // make the temp list the new currentlist
             possibleSuggestion = tempPosib;
-        } 
-        pattern = Pattern.compile("^(?<number>\\d+\\D?)(.+)$");
-        matcher = pattern.matcher(s);
-        if (matcher.matches()) {
-            // loop trough the current List of possibleSuggestion
-            for (String string : possibleSuggestionForPostCodes) {
-                //  check if it is in the list of all possibleSuggestion
-                if (matcher.group("number").contains(string.subSequence(0, 3))) {
-                    // take the postcode that matches and then suggest all the posible streetcominations 
-                    for (String street : possibleSuggestion) {
-                        tempPosib.add(street + ", " + s);
-                    }
-                }
-            }
-            // make the temp list the new currentlist 
-            possibleSuggestion = tempPosib;
-        } 
+        }
     }
 }

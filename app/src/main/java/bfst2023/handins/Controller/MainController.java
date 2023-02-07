@@ -2,13 +2,8 @@ package bfst2023.handins.Controller;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.ResourceBundle;
-import java.util.Set;
-
 import bfst2023.handins.Model.Address;
 import bfst2023.handins.Model.AutoComplete;
 import bfst2023.handins.Model.NoMatchException;
@@ -17,7 +12,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 
-import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
 
 import javafx.scene.text.Text;
@@ -34,10 +28,8 @@ public class MainController implements Initializable {
     @FXML
     private Text street;
     @FXML
-    private Text error;
-    private AutoCompletionBinding initText;
-    private AutoCompletionBinding<String> updatedAutoText;
 
+    private Text error;
     private Address address;
     private AutoComplete posibAutoComplete;
 
@@ -56,6 +48,11 @@ public class MainController implements Initializable {
     public void upddateAddress(ActionEvent event) {
 
         try {
+
+            if (error.getText() != null) {
+                error.setText("");
+            }
+
             address = Address.parse(inputField.getText());
             System.out.println(address.city);
             street.setText(address.street);
@@ -72,6 +69,7 @@ public class MainController implements Initializable {
             city.setText(address.city);
         } catch (NoMatchException e) {
             System.out.println(e.getMessage());
+            error.setText(e.getMessage());
             posibAutoComplete.number(inputField.getText());
             updateAutoFill();
         } catch (NullPointerException e) {

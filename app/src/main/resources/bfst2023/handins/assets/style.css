@@ -7,7 +7,7 @@
 }
 
 .text-input {
-    -fx-text-fill: -fx-text-inner-color;
+    -fx-text-fill: black;
     -fx-highlight-fill: derive(-fx-control-inner-background,-20%);
     -fx-highlight-text-fill: -fx-text-inner-color;
     -fx-prompt-text-fill: derive(-fx-control-inner-background,-30%);
