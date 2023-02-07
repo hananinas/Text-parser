@@ -58,7 +58,7 @@ public class AutoComplete {
 
     public void number(String s) {
 
-        // instiate a temp ArrayList with possibilities
+        // initializ a temp ArrayList with possibilities
         ArrayList<String> tempPosib = new ArrayList<>();
 
         // check if the string is a street
