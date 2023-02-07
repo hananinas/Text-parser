@@ -1,6 +1,0 @@
-(?<street>\\D.+)(?<number>\\d{1,3}\\D.+|\\d{1,3})(\\s)(?<floor>\\d+\\.\\stv|\\d+\\.\\sst)(\\s)(?<postalcode>\\d{4})(\\s)(?<city>\\D+)$
-
-(?<street>\\D.+)(?<number>\\d{1,3}\\D.+|\\d{1,3})(\\s)(?<postalcode>\\d{4})(\\s)(?<city>\\D+)$
-
-(?<street>[A-Za-zæøå]+?)(?<number>\d{1,3}+\D.+|\d{1,3})(\\s)(?<floor>\sst|\skl|\s\d{1,2}|\s)(?<side>\sth,|\stv,|\smf,|\s\d{1,2}|\s\D|\s)(?<postalcode>\s\d{4})?(?<city>[A-Za-zæøå ]+)$
-

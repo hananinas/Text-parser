@@ -18,7 +18,7 @@ public class AutoComplete {
 
     public static void main(String[] args) throws IOException {
         AutoComplete auto = new AutoComplete();
-        auto.number("");
+        auto.updateAutoFill("Lilledal 30");
         for (String string : auto.possibleSuggestion) {
             System.out.println(string);
         }
@@ -56,19 +56,19 @@ public class AutoComplete {
         return possibleSuggestion;
     }
 
-    public void number(String s) {
+    public void updateAutoFill(String s) {
 
         // initializ a temp ArrayList with possibilities
         ArrayList<String> tempPosib = new ArrayList<>();
 
         // check if the string is a street
-        pattern = Pattern.compile("^(?<street>[\\w.]+)(.+)$");
+        pattern = Pattern.compile("^(?<street>[\\D\\s.]+)(.+)$");
         matcher = pattern.matcher(s);
         if (matcher.matches()) {
             // loop trough the current List of possibleSuggestion
             for (String string : possibleSuggestion) {
-                // if check if it is in the list of all possibleSuggestion
-                if (matcher.group("street").toLowerCase().equals(string.toLowerCase())) {
+                // Check if it is in the list of all possibleSuggestion
+                if (matcher.group("street").trim().toLowerCase().equals(string.toLowerCase())) {
                     for (String postcode : possibleSuggestionForPostCodes) {
                         tempPosib.add(s.substring(0, 1).toUpperCase() + s.substring(1) + ", " + postcode);
                     }
