@@ -3,8 +3,6 @@
  */
 package bfst2023.handins;
 
-import java.net.URISyntaxException;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
