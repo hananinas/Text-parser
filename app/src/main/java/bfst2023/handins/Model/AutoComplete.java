@@ -70,7 +70,7 @@ public class AutoComplete {
                 // if check if it is in the list of all possibleSuggestion
                 if (matcher.group("street").toLowerCase().equals(string.toLowerCase())) {
                     for (String postcode : possibleSuggestionForPostCodes) {
-                        tempPosib.add(s.substring(0, 1).toUpperCase() + s.substring(1) + " " + postcode);
+                        tempPosib.add(s.substring(0, 1).toUpperCase() + s.substring(1) + ", " + postcode);
                     }
                 }
             }

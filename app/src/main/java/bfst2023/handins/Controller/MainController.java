@@ -3,10 +3,13 @@ package bfst2023.handins.Controller;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import bfst2023.handins.Model.Address;
 import bfst2023.handins.Model.AutoComplete;
 import bfst2023.handins.Model.NoMatchException;
+import impl.org.controlsfx.autocompletion.AutoCompletionTextFieldBinding;
+import impl.org.controlsfx.autocompletion.SuggestionProvider;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -32,6 +35,9 @@ public class MainController implements Initializable {
     private Text error;
     private Address address;
     private AutoComplete posibAutoComplete;
+    private  SuggestionProvider suggestionProvider;
+
+
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
@@ -42,7 +48,8 @@ public class MainController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        updateAutoFill();
+        suggestionProvider = SuggestionProvider.create(posibAutoComplete.getPosibleSuggestion());
+        new AutoCompletionTextFieldBinding<>(inputField, suggestionProvider);
     }
 
     public void upddateAddress(ActionEvent event) {
@@ -79,7 +86,9 @@ public class MainController implements Initializable {
     }
 
     public void updateAutoFill() {
-        TextFields.bindAutoCompletion(inputField, posibAutoComplete.getPosibleSuggestion());
+        List<String> newSuggestions = posibAutoComplete.getPosibleSuggestion();
+        suggestionProvider.clearSuggestions();
+        suggestionProvider.addPossibleSuggestions(newSuggestions);
     }
 
 }
