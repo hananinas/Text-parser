@@ -50,7 +50,7 @@ The parsed address is obtained using the Parser class. In the event that the add
 
 - City: the city name, captured as the "city" group. Matched by the pattern \D+. This pattern matches one or more characters that are not a digit.
 
-The overall string is matched by the pattern \s*, which matches zero or more whitespaces.
+- The overall string is matched by the pattern \s*, which matches zero or more whitespaces.
 
 
 
