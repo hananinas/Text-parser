@@ -16,6 +16,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
+
+import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
 
 import javafx.scene.text.Text;
@@ -33,6 +35,8 @@ public class MainController implements Initializable {
     private Text street;
     @FXML
     private Text error;
+    private AutoCompletionBinding initText;
+    private AutoCompletionBinding<String> updatedAutoText;
 
     private Address address;
     private AutoComplete posibAutoComplete;
@@ -45,9 +49,8 @@ public class MainController implements Initializable {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
         }
+        updateAutoFill();
     }
 
     public void upddateAddress(ActionEvent event) {
@@ -65,17 +68,20 @@ public class MainController implements Initializable {
             } else {
                 number.setText(address.house + " " + address.floor + " " + address.side);
             }
-
             postalcode.setText(address.postcode);
             city.setText(address.city);
         } catch (NoMatchException e) {
             System.out.println(e.getMessage());
             posibAutoComplete.number(inputField.getText());
-            TextFields.bindAutoCompletion(inputField, posibAutoComplete.getPosibleSuggestion());
+            updateAutoFill();
         } catch (NullPointerException e) {
             error.setText("No input!");
         }
 
+    }
+
+    public void updateAutoFill() {
+        TextFields.bindAutoCompletion(inputField, posibAutoComplete.getPosibleSuggestion());
     }
 
 }
