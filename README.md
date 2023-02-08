@@ -1,4 +1,4 @@
-# BFST2023-handins
+# BFST2023- For UNI project
 
 A JavaFX application for parsing danish addresses, built with Gradle.
 
